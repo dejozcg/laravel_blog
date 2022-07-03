@@ -1,11 +1,12 @@
 <x-layout>
     <x-slot name="content">
         <article>
-            <h1>{{ $post->title }}</h1>
-            <a href="">{{ $post->category->name }}</a>
+            <h1>{{ $posts->title }}</h1>
+            Writen by: <a href="/user/{{ $posts->user->id }}">{{ $posts->user->name }}</a>, Category: 
+            <a href="/categories/{{ $posts->category->slug }}">{{ $posts->category->name }}</a>
             <div>
                 <p>
-                    {{ $post->body }}
+                    {!! $posts->body !!}
                 </p>
             </div>
         </article>
