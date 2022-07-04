@@ -2,7 +2,7 @@
     <x-slot name="content">
         <article>
             <h1>{{ $posts->title }}</h1>
-            Writen by: <a href="/user/{{ $posts->user->id }}">{{ $posts->user->name }}</a>, Category: 
+            Writen by: <a href="/autor/{{ $posts->user->username }}">{{ $posts->user->name }}</a>, Category: 
             <a href="/categories/{{ $posts->category->slug }}">{{ $posts->category->name }}</a>
             <div>
                 <p>
