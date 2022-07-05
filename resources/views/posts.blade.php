@@ -1,6 +1,26 @@
 <x-layout>
     <x-slot name="content">
-    @foreach ($posts as $post)
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+           
+           <x-post-featured-card :post="$posts[0]" />
+
+            <div class="lg:grid lg:grid-cols-2">
+      
+            </div>
+
+            <div class="lg:grid lg:grid-cols-3">
+                @foreach ($posts->skip(1) as $post)
+                    <x-post-card :post="$post" />
+                @endforeach
+            </div>
+        </main>
+
+    </x-slot>
+</x-layout>
+
+
+    <!-- @foreach ($posts as $post)
         <article>
             <h1>
                 <a href="/posts/{{ $post->slug }}">
@@ -14,6 +34,4 @@
                 {{ $post->excerpt }}
             </div>
         </article>
-    @endforeach
-    </x-slot>
-</x-layout>
+    @endforeach -->

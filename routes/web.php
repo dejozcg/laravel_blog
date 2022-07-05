@@ -26,7 +26,7 @@ Route::get('/', function () {
     // });
 
     return view('posts', [
-        'posts' => Post::with('category', 'user')->get()
+        'posts' => Post::get()
     ]);
 });
 
