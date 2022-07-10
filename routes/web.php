@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -16,19 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    /*
-        * Ovim mozemo da ulogujemo querije na bazi
-        * Umjesto ovoga koristim ekstenziju laravel clockwork
-    */
-    // \Illuminate\Support\Facades\DB::listen(function ($query){
-    //     logger($query->sql, $query->bindings);
-    // });
+// Route::get('/', function () {
+//     /*
+//         * Ovim mozemo da ulogujemo querije na bazi
+//         * Umjesto ovoga koristim ekstenziju laravel clockwork
+//     */
+//     // \Illuminate\Support\Facades\DB::listen(function ($query){
+//     //     logger($query->sql, $query->bindings);
+//     // });
 
-    return view('posts', [
-        'posts' => Post::get()
-    ]);
-});
+//     return view('posts', [
+//         'posts' => Post::get(),
+//         'categories' => Category::all()
+//     ]);
+// })->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 // Route::get('posts/{post:slug}', function ($post) {
 //     return view('post', [
@@ -36,21 +39,19 @@ Route::get('/', function () {
 //     ]);
 // });
 
-Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', [
-        // 'posts' => Post::findOrFail($slug)
-        'posts' => $post
-        ]);
-});
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts', [
-        'posts' => $category->post
+        'posts' => $category->post,
+        // 'curentCategory' => $category,
+        'categories' => Category::all()
     ]);
-});
+})->name('category');
 
 Route::get('autor/{user:username}', function (User $user) {
     return view('posts', [
-        'posts' => $user->post
+        'posts' => $user->post,
+        'categories' => Category::all()
     ]);
 });
