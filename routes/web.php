@@ -41,13 +41,13 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/{category:slug}', function (Category $category) {
-    return view('posts', [
-        'posts' => $category->post,
-        // 'curentCategory' => $category,
-        'categories' => Category::all()
-    ]);
-})->name('category');
+// Route::get('categories/{category:slug}', function (Category $category) {
+//     return view('posts', [
+//         'posts' => $category->post,
+//         // 'curentCategory' => $category,
+//         'categories' => Category::all()
+//     ]);
+// })->name('category');
 
 Route::get('autor/{user:username}', function (User $user) {
     return view('posts', [

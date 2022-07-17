@@ -17,9 +17,43 @@ class Post extends Model
     {
         if($filters['search'] ?? false){
             $query
+            ->where('title', 'like', '%' . $filters['search'] . '%')
+            ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+        }
+        $query->when($filters['category'] ?? false, fn($guery, $category) => 
+            $query->whereHas('category', fn($query) => 
+                $query->where('slug', $category)
+            )
+        );
+        /*
+        ovo je:
+         if($filters['search'] ?? false){
+            $query
             ->where('title', 'like', '%' . request('search') . '%')
             ->orWhere('body', 'like', '%' . request('search') . '%');
         }
+        isto sto i ovo:
+         $query->when($filters['search'] ?? false, fn($guery, $search) => 
+            $query
+            ->where('title', 'like', '%' . request('search') . '%')
+            ->orWhere('body', 'like', '%' . request('search') . '%'));
+
+
+            -- ovo je isto
+             $query->when($filters['category'] ?? false, fn($guery, $category) => 
+            $query
+                ->whereExists(fn($query) => 
+                    $query->from('categories')
+                        ->whereColumn('categories.id', 'posts.category_id')
+                        ->where('categories.slug', $category))
+        );
+        -- sa ovim
+                $query->when($filters['category'] ?? false, fn($guery, $category) => 
+            $query->whereHas('category', fn($query) => 
+                $query->where('slug', $category)
+            )
+        );
+        */
     }
     
     public function category() {

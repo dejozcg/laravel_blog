@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         return view('posts', [
             // 'posts' => Post::get(),
-            'posts' => Post::latest()->filter(request(['search']))->get(),
+            'posts' => Post::latest()->filter(request(['search', 'category']))->get(), // poziva scopeFilter u post modelu. kao drugi argument prosledjuje array sa search key a prvi je query po laravel defaultu
             'categories' => Category::all()
         ]);
     }
