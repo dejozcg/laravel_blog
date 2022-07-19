@@ -10,19 +10,19 @@ class PostController extends Controller
 {
     public function Index() 
     {
-        return view('posts', [
+        return view('posts.index', [
             // 'posts' => Post::get(),
-            'posts' => Post::latest()->filter(request(['search', 'category']))->get(), // poziva scopeFilter u post modelu. kao drugi argument prosledjuje array sa search key a prvi je query po laravel defaultu
-            'categories' => Category::all()
+            'posts' => Post::latest()->filter(request(['search', 'category', 'autor']))->get(), // poziva scopeFilter u post modelu. kao drugi argument prosledjuje array sa search key a prvi je query po laravel defaultu
+            // 'categories' => Category::all()
         ]);
     }
 
     public function show(Post $post) 
     {
-        return view('post', [
+        return view('posts.show', [
             // 'posts' => Post::findOrFail($slug)
             'posts' => $post,
-            'categories' => Category::all()
+            // 'categories' => Category::all()
             ]);
     }
 }
