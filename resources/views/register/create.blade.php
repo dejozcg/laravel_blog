@@ -32,7 +32,7 @@
               <small id="helpId" class="text-muted">{{ $message }}</small>
               @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <x-form.submit-button>Submit</x-form.submit-button>
         </form>
     </main>
     </x-slot>
