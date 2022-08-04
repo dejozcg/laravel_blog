@@ -1,8 +1,8 @@
 <x-layout>
     <x-slot name="content">
         @include('posts._header')
-        <section class="py-8 max-w-md mx-auto">
-            <h1 class="text-lg font-bold mb-4">Publish new post</h1>
+        <x-settings heading="Publish new post">
+
             <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
                 <x-panel>
                     <form action="/admin/post" method="post" enctype="multipart/form-data" class="max-w-sm mx-auto">
@@ -28,7 +28,7 @@
                     </form>
                 </x-panel>
             </main>
-        </section>
 
+        </x-settings>
     </x-slot>
 </x-layout>
