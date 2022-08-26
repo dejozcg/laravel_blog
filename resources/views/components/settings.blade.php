@@ -6,7 +6,7 @@
             <h4 class="font-semibold mb-4">Links</h4>
             <ul>
                 <li>
-                    <a class="{{ request()->is('admin/dashboard') ? 'text-blue-500' : '' }}" href="/admin/dashboard">Dashboard</a>
+                    <a class="{{ request()->is('admin/post') ? 'text-blue-500' : '' }}" href="/admin/post">All posts</a>
                 </li>
                 <li>
                     <a class="{{ request()->is('admin/post/create') ? 'text-blue-500' : '' }}" href="/admin/post/create">New Post</a>

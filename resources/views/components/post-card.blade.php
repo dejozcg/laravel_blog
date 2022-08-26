@@ -3,17 +3,12 @@
        {{ $attributes->merge([ 'class' => 'transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl']) }} >
                     <div class="py-6 px-5">
                         <div>
-                            <img src="{{ isset($post->thumbnail) ? asset('storage/' . $post->thumbnail) : '/images/illustration-1.png' }}" alt="Blog Post illustration" class="rounded-xl">
+                            <img src="{{ isset($post->thumbnail) ? asset('storage/' . $post->thumbnail) : './images/illustration-1.png' }}" alt="Blog Post illustration" class="rounded-xl">
                         </div>
 
                         <div class="mt-8 flex flex-col justify-between">
                             <header>
-                                <div class="space-x-2">
-                                    <a href="/?category={{ $post->category->slug }}"
-                                       class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                                       style="font-size: 10px">{{ $post->category->name }}</a>
-                                </div>
-
+                                <x-category-button :category="$post->category" />
                                 <div class="mt-4">
                                     <h1 class="text-3xl">
                                       {{ $post->title }}
@@ -33,7 +28,7 @@
 
                             <footer class="flex justify-between items-center mt-8">
                                 <div class="flex items-center text-sm">
-                                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                                    <img src="./images/lary-avatar.svg" alt="Lary avatar">
                                     <div class="ml-3">
                                         <h5 class="font-bold">
                                             <a href="/?autor={{ $post->user->username }}">{{ $post->user->name }}</a>

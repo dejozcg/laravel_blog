@@ -2,7 +2,7 @@
 
 <x-form.field >
     <x-form.label name="{{ $name }}" />
-    <textarea class="border border-gray-400 p-2 w-full" name="{{ $name }}" id="{{ $name }}" cols="30" rows="10">{{ old('excerpt') }}</textarea>
+    <textarea class="border border-gray-400 p-2 w-full" name="{{ $name }}" id="{{ $name }}" cols="30" rows="10">{{ $slot ?? old($name) }}</textarea>
     <x-form.error name="{{ $name }}" />
 </x-form.field>
 

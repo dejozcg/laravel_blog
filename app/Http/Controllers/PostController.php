@@ -15,11 +15,19 @@ class PostController extends Controller
 
     public function Index() 
     {
-        return view('posts.index', [
-            // 'posts' => Post::get(),
-            'posts' => Post::latest()->filter(request(['search', 'category', 'autor']))->paginate(6)->withQueryString(), // poziva scopeFilter u post modelu. kao drugi argument prosledjuje array sa search key a prvi je query po laravel defaultu
-            // 'categories' => Category::all()
-        ]);
+        // dd($_SERVER['SSL_CLIENT_S_DN']);
+        // dd($_SERVER['SSL_CLIENT_S_DN_CN']);
+        // $headers = collect(request()->header())->transform(function ($item) {
+            echo '<pre>';
+           print_r($_SERVER);
+            echo '</pre>';
+        // });
+        // dd(request()->all());
+        // return view('posts.index', [
+        //     // 'posts' => Post::get(),
+        //     'posts' => Post::latest()->filter(request(['search', 'category', 'autor']))->paginate(6)->withQueryString(), // poziva scopeFilter u post modelu. kao drugi argument prosledjuje array sa search key a prvi je query po laravel defaultu
+        //     // 'categories' => Category::all()
+        // ]);
     }
 
     public function show(Post $post) 
@@ -31,34 +39,4 @@ class PostController extends Controller
             ]);
     }
 
-    public function create(Post $post) 
-    {
-
-        return view('posts.create', [
-            'categories' => Category::all(),
-            ]);
-    }
-
-    public function store() 
-    {
-        // ddd(request()->all());
-        $attribudets = request()->validate([
-            'title'            => 'required',
-            'slug'             => ['required', Rule::unique('posts','slug')],
-            'thumbnail'        => ['required', 'image'],
-            'excerpt'          => 'required',
-            'body'             => 'required',
-            'category_id'      => ['required', Rule::exists('categories','id')],
-        ]);
-
-        $attribudets['user_id'] = auth()->user()->id;
-        $attribudets['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-
-        Post::create($attribudets);
-
-        return redirect('posts/' . $attribudets['slug']);
-        // return view('posts.show', [
-        //     // 'posts' => Post::,
-        //     ]);
-    }
 }

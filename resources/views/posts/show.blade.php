@@ -12,7 +12,7 @@
                     </p>
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                        <img src="./images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">{{ $posts->user->name }}</h5>
                         </div>
@@ -36,11 +36,8 @@
                             Back to Posts
                         </a>
 
-                        <div class="space-x-2">
-                            <a href="/?category={{ $posts->category->slug }}"
-                                class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                                style="font-size: 10px">{{ $posts->category->name }}</a>
-                        </div>
+                        <x-category-button :category="$posts->category" />
+                               
                     </div>
 
                     <h1 class="font-bold text-3xl lg:text-4xl mb-10">
